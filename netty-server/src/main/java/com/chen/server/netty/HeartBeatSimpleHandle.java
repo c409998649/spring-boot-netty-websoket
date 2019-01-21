@@ -51,6 +51,8 @@ public class HeartBeatSimpleHandle extends SimpleChannelInboundHandler<Object> {
         // 传统的HTTP接入
         if (msg instanceof FullHttpRequest) {
             handleHttpRequest(ctx, ((FullHttpRequest) msg));
+            // 存储当前登录ctx
+            //NettySocketHolder.put((long) msg.getRequestId(), (NioSocketChannel) ctx.channel());
             // WebSocket接入
         } else if (msg instanceof WebSocketFrame) {
             System.out.println(handshaker.uri());
@@ -59,7 +61,6 @@ public class HeartBeatSimpleHandle extends SimpleChannelInboundHandler<Object> {
             }
             log.info("收到msg={},id={}", msg);
             //保存客户端与 Channel 之间的关系
-            //NettySocketHolder.put((long) msg.getRequestId(), (NioSocketChannel) ctx.channel());
         }
     }
 
