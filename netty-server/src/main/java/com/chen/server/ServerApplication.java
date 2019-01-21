@@ -1,13 +1,12 @@
 package com.chen.server;
 
-import com.chen.server.zokeeper.RegistryZokeeper;
+import com.chen.server.zookeeper.RegistryZookeeper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-//@ImportResource(locations= {"classpath:spring.xml"})
 public class ServerApplication implements CommandLineRunner {
 
     @Value("${app.protocol.port}")
@@ -22,7 +21,7 @@ public class ServerApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Thread thread = new Thread(new RegistryZokeeper(port, serverPort));
+        Thread thread = new Thread(new RegistryZookeeper(port, serverPort));
         thread.setName("registry-zk");
         thread.start();
     }

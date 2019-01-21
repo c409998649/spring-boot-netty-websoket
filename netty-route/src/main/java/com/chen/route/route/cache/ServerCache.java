@@ -1,6 +1,6 @@
 package com.chen.route.route.cache;
 
-import com.chen.route.route.zokeeper.ZokeeperUtil;
+import com.chen.route.route.Zookeeper.ZookeeperUtil;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -31,7 +31,7 @@ public class ServerCache {
     });
 
     @Resource
-    private ZokeeperUtil zokeeperUtil;
+    private ZookeeperUtil ZookeeperUtil;
 
     private AtomicLong index = new AtomicLong();
 
@@ -65,7 +65,7 @@ public class ServerCache {
         List<String> list = new ArrayList<>();
 
         if (cache.size() == 0) {
-            List<String> allNode = zokeeperUtil.getAllNode();
+            List<String> allNode = ZookeeperUtil.getAllNode();
             for (String node : allNode) {
                 if(!node.equals("route")){
                     addCache(node);

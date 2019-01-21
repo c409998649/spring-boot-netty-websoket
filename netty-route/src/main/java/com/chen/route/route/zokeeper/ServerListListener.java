@@ -1,4 +1,4 @@
-package com.chen.route.route.zokeeper;
+package com.chen.route.route.Zookeeper;
 
 import com.chen.route.route.util.SpringBeanFactory;
 
@@ -9,19 +9,19 @@ import com.chen.route.route.util.SpringBeanFactory;
  **/
 public class ServerListListener  implements Runnable{
 
-    private ZokeeperUtil zokeeperUtil;
+    private ZookeeperUtil ZookeeperUtil;
 
     private AppConfiguration appConfiguration ;
 
 
     public ServerListListener() {
-        zokeeperUtil = SpringBeanFactory.getBean(ZokeeperUtil.class) ;
+        ZookeeperUtil = SpringBeanFactory.getBean(ZookeeperUtil.class) ;
         appConfiguration = SpringBeanFactory.getBean(AppConfiguration.class) ;
     }
 
     @Override
     public void run() {
         //注册监听服务
-        zokeeperUtil.subscribeEvent("/"+appConfiguration.getZkRoot());
+        ZookeeperUtil.subscribeEvent("/"+appConfiguration.getZkRoot());
     }
 }

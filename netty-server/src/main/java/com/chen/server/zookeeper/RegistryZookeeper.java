@@ -1,4 +1,4 @@
-package com.chen.server.zokeeper;
+package com.chen.server.zookeeper;
 
 import com.chen.server.util.SpringBeanFactory;
 import lombok.extern.slf4j.Slf4j;
@@ -8,33 +8,33 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
- * 注册zokeeper
+ * 注册Zookeeper
  * @author chenzhiying@zbj.com
- * @title 注册zokeeper
+ * @title 注册Zookeeper
  * @date 2019-01-17 上午11:07
  **/
 @Slf4j
-public class RegistryZokeeper implements Runnable{
+public class RegistryZookeeper implements Runnable{
 
     private int port;
 
     private int serverPort;
 
-    private ZokeeperUtil zokeeperUtil;
+    private ZookeeperUtil ZookeeperUtil;
 
     private AppConfiguration appConfiguration;
 
-    public RegistryZokeeper(int port, int serverPort){
+    public RegistryZookeeper(int port, int serverPort){
         this.port = port;
         this.serverPort = serverPort;
-        zokeeperUtil = SpringBeanFactory.getBean(ZokeeperUtil.class) ;
+        ZookeeperUtil = SpringBeanFactory.getBean(ZookeeperUtil.class) ;
         appConfiguration = SpringBeanFactory.getBean(AppConfiguration.class) ;
     }
 
     @Override
     public void run() {
         //创建父节点
-        zokeeperUtil.createRootNode();
+        ZookeeperUtil.createRootNode();
 
         //是否要将自己注册到 ZK
         String path = null;
@@ -43,7 +43,7 @@ public class RegistryZokeeper implements Runnable{
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
-        zokeeperUtil.createNode(path);
+        ZookeeperUtil.createNode(path);
         log.info("注册 zookeeper 成功，msg=[{}]", path);
     }
 }

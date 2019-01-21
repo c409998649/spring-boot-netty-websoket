@@ -1,6 +1,7 @@
-package com.chen.server.zokeeper;
+package com.chen.server.zookeeper;
 
 import com.chen.comm.util.Constant;
+import com.chen.server.zookeeper.AppConfiguration;
 import org.I0Itec.zkclient.ZkClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -8,14 +9,14 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 
 /**
- * zokeeper工具类
+ * Zookeeper工具类
  *
  * @author chenzhiying@zbj.com
- * @title zokeeper工具类
+ * @title Zookeeper工具类
  * @date 2019-01-17 上午10:36
  **/
 @Component
-public class ZokeeperUtil {
+public class ZookeeperUtil {
 
     private ZkClient zkClient;
 
@@ -23,7 +24,7 @@ public class ZokeeperUtil {
     private AppConfiguration appConfiguration ;
 
     @Value("${app.registry.address}")
-    public void ZokeeperUtil(String address){
+    public void ZookeeperUtil(String address){
         zkClient = new ZkClient(address, Constant.ZK_SESSION_TIMEOUT, Constant.ZK_CONNECTION_TIMEOUT);
     }
 

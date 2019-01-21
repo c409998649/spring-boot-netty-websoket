@@ -1,4 +1,4 @@
-package com.chen.server.zokeeper;
+package com.chen.server.zookeeper;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 
 /**
- * 读取zokeeper配置文件信息
+ * 读取Zookeeper配置文件信息
  *
  * @author chenzhiying@zbj.com
  * @title <一句话说明功能>

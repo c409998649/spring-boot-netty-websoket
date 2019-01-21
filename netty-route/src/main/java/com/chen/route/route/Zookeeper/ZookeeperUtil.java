@@ -1,4 +1,4 @@
-package com.chen.route.route.zokeeper;
+package com.chen.route.route.Zookeeper;
 
 import com.alibaba.fastjson.JSON;
 import com.chen.comm.util.Constant;
@@ -20,7 +20,7 @@ import java.util.List;
  **/
 @Slf4j
 @Component
-public class ZokeeperUtil {
+public class ZookeeperUtil {
 
     private ZkClient zkClient;
 
@@ -28,7 +28,7 @@ public class ZokeeperUtil {
     private ServerCache serverCache;
 
     @Value("${app.registry.address}")
-    public void ZokeeperUtil(String address){
+    public void ZookeeperUtil(String address){
         zkClient = new ZkClient(address, Constant.ZK_SESSION_TIMEOUT, Constant.ZK_CONNECTION_TIMEOUT);
     }
 
