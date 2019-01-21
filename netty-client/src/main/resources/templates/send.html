@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>webSokect</title>
+</head>
+<script type="application/javascript" src="/static/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+    var websocket;
+
+    $(function(){
+        $.ajax({
+            type: "POST",
+            url: "/login",
+            data: {
+                account: "c409998649",
+                userName: "陈1"
+            },
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                websoketCannel(result.data.userId, result.data.account, result.data.userName);
+            }
+        });
+    });
+
+    function websoketCannel(userId, account, userName){
+
+        //如果浏览器支持WebSocket
+        if(window.WebSocket){
+            websocket = new WebSocket("ws://localhost:1212/websocket?userId="+ userId +"&account="+ account +"&userName="+ userName +"");  //获得WebSocket对象
+
+            //当有消息过来的时候触发
+            websocket.onmessage = function(event){
+                console.log(event);
+            };
+
+            //连接关闭的时候触发
+            websocket.onclose = function(event){
+                console.log("断开连接");
+            };
+
+            //连接打开的时候触发
+            websocket.onopen = function(event){
+                console.log("建立连接");
+            }
+        }else{
+            alert("浏览器不支持WebSocket");
+        }
+    }
+
+    function sendMsg(msg) { //发送消息
+        /*if(window.WebSocket){
+            if(websocket.readyState == WebSocket.OPEN) { //如果WebSocket是打开状态
+                websocket.send(msg); //send()发送消息
+            }
+        }else{
+            return;
+        }*/
+        $.ajax({
+            type: "POST",
+            url: "/send",
+            data: {
+                sendUserId: 1,
+                receiveUserId: 2,
+                msg: msg
+            },
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                console.log("发送成功");
+            }
+        });
+    }
+
+</script>
+<body>
+<button onclick="sendMsg('哈哈哈哈')">发送</button>
+</body>
+</html>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+import springfox.documentation.spring.web.json.Json;
 
 import javax.annotation.Resource;
 
@@ -40,10 +41,7 @@ public class IndexController {
     @ResponseBody
     public JsonMsg sendMsg(@RequestBody UserInfo userInfo){
         JsonMsg jsonMsg = new JsonMsg();
-        GoogleProtocolVO googleProtocolVO = new GoogleProtocolVO();
-        googleProtocolVO.setRequestId(userInfo.getUserId());
-        googleProtocolVO.setMsg(userInfo.getMsg());
-        heartBeatServer.sendMsg(googleProtocolVO);
+        heartBeatServer.sendMsg(userInfo);
         return jsonMsg;
     }
 }

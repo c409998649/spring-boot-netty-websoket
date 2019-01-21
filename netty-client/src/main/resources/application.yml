@@ -9,6 +9,9 @@ spring:
     suffix: .html
     encoding: UTF-8
     mode: LEGACYHTML5
+  #静态资源文件
+  mvc:
+    static-path-pattern: /static/**
 # 连接编码
 channel:
   id: 100

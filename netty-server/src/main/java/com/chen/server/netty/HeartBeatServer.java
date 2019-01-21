@@ -1,7 +1,9 @@
 package com.chen.server.netty;
 
+import com.alibaba.fastjson.JSONObject;
 import com.chen.comm.protocol.BaseRequestProto;
 import com.chen.comm.vo.GoogleProtocolVO;
+import com.chen.server.entity.UserInfo;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -10,6 +12,7 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -63,19 +66,15 @@ public class HeartBeatServer {
 
     /**
      * 发送 Google Protocol 编码消息
-     * @param googleProtocolVO 消息
+     * @param userInfo 消息
      */
-    public void sendMsg(final GoogleProtocolVO googleProtocolVO){
-        NioSocketChannel socketChannel = NettySocketHolder.get(Long.valueOf(googleProtocolVO.getRequestId()));
-        BaseRequestProto.RequestProtocol protocol = BaseRequestProto.RequestProtocol.newBuilder()
-                .setRequestId(googleProtocolVO.getRequestId())
-                .setReqMsg(googleProtocolVO.getMsg())
-                .build();
-        ChannelFuture future = socketChannel.writeAndFlush(protocol);
+    public void sendMsg(final UserInfo userInfo){
+        NioSocketChannel socketChannel = NettySocketHolder.get(Long.valueOf(userInfo.getUserId()));
+        ChannelFuture future = socketChannel.writeAndFlush(new TextWebSocketFrame(JSONObject.toJSONString(userInfo)));
         future.addListener(new ChannelFutureListener() {
             @Override
             public void operationComplete(ChannelFuture channelFuture) throws Exception {
-                log.info("服务端手动发送 Google Protocol 成功={}", googleProtocolVO.getMsg());
+                log.info("服务端手动发送 Google Protocol 成功={}", userInfo.getMsg());
             }
         });
     }

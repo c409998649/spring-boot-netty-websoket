@@ -8,6 +8,7 @@ import com.chen.comm.util.OkHttpUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
@@ -28,14 +29,37 @@ public class IndexController {
 
     private int userId = 0;
 
-    @GetMapping("/index")
+    /**
+     * 发送者
+     *
+     * @return java.lang.String
+     * @title <一句话说明功能>
+     * @author chenzhiying@zbj.com
+     * @date 19-1-21
+     * @since openJDK 1.8
+     **/
+    @GetMapping("/send")
     public String index(){
-        return "/index";
+        return "/send";
     }
 
-    @GetMapping("/login")
+    /**
+     * 接收者
+     *
+     * @return java.lang.String
+     * @title <一句话说明功能>
+     * @author chenzhiying@zbj.com
+     * @date 19-1-21
+     * @since openJDK 1.8
+     **/
+    @GetMapping("/receive")
+    public String receive(){
+        return "/receive";
+    }
+
+    @PostMapping("/login")
     @ResponseBody
-    public JsonMsg login(String account, String userName) throws IOException {
+    public JsonMsg login(String account, String userName) {
         JsonMsg jsonMsg = new JsonMsg();
         userId = userId + 1;
         UserInfo userInfo = new UserInfo();
@@ -48,6 +72,7 @@ public class IndexController {
         jsonObject.put("account", account);
         jsonObject.put("userName", userName);
         OkHttpUtil.postJsonParams(loginUrl, jsonObject.toString());
+        jsonMsg.setData(userInfo);
         return jsonMsg;
     }
 
@@ -63,9 +88,9 @@ public class IndexController {
      * @date 19-1-18
      * @since openJDK 1.8
      **/
-    @GetMapping("/send")
+    @PostMapping("/send")
     @ResponseBody
-    public JsonMsg send(String receiveUserId, String sendUserId, String msg) throws IOException {
+    public JsonMsg send(String receiveUserId, String sendUserId, String msg) {
         JsonMsg jsonMsg = new JsonMsg();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("receiveUserId", receiveUserId);

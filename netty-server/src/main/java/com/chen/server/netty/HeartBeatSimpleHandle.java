@@ -50,9 +50,17 @@ public class HeartBeatSimpleHandle extends SimpleChannelInboundHandler<Object> {
     protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
         // 传统的HTTP接入
         if (msg instanceof FullHttpRequest) {
-            handleHttpRequest(ctx, ((FullHttpRequest) msg));
+            FullHttpRequest req = (FullHttpRequest) msg;
+            handleHttpRequest(ctx, req);
+            //获取url后置参数
+            String uri=req.uri();
+            QueryStringDecoder queryStringDecoder = new QueryStringDecoder(uri);
+            Map<String, List<String>> parameters = queryStringDecoder.parameters();
+            Integer userId = Integer.valueOf(parameters.get("userId").get(0));
             // 存储当前登录ctx
-            //NettySocketHolder.put((long) msg.getRequestId(), (NioSocketChannel) ctx.channel());
+            if(NettySocketHolder.get((long)userId) == null){
+                NettySocketHolder.put((long)userId, (NioSocketChannel) ctx.channel());
+            }
             // WebSocket接入
         } else if (msg instanceof WebSocketFrame) {
             System.out.println(handshaker.uri());
