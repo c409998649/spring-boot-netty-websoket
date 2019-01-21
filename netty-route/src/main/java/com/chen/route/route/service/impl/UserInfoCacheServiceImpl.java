@@ -29,7 +29,7 @@ public class UserInfoCacheServiceImpl implements UserInfoCacheService {
         if(userInfo != null){
             return userInfo;
         }
-        String account = redisService.get(Constant.ACCTOUNT + userId).toString();
+        String account = redisService.get(Constant.ACCOUNT + userId).toString();
         String userName = redisService.get(Constant.USER + userId).toString();
         if(userName != null){
             userInfo = new UserInfo();

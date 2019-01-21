@@ -50,7 +50,7 @@ public class RouteController {
         JsonMsg jsonMsg = new JsonMsg();
         String server = serverCache.selectServer();
         redisService.set(Constant.ROUTE+userInfo.getUserId(), server);
-        redisService.set(Constant.ACCTOUNT+userInfo.getUserId(), userInfo.getAccount());
+        redisService.set(Constant.ACCOUNT+userInfo.getUserId(), userInfo.getAccount());
         redisService.set(Constant.USER+userInfo.getUserId(), userInfo.getUserName());
         return jsonMsg;
     }

@@ -1,8 +1,6 @@
 package com.chen.server.netty;
 
 import com.alibaba.fastjson.JSONObject;
-import com.chen.comm.protocol.BaseRequestProto;
-import com.chen.comm.vo.GoogleProtocolVO;
 import com.chen.server.entity.UserInfo;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;

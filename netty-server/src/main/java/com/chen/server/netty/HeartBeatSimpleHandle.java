@@ -28,7 +28,7 @@ import java.util.Map;
 @Slf4j
 public class HeartBeatSimpleHandle extends SimpleChannelInboundHandler<Object> {
 
-    private WebSocketServerHandshaker handshaker;
+    private WebSocketServerHandshaker handShaker;
 
     /**
      * 取消绑定
@@ -63,7 +63,6 @@ public class HeartBeatSimpleHandle extends SimpleChannelInboundHandler<Object> {
             }
             // WebSocket接入
         } else if (msg instanceof WebSocketFrame) {
-            System.out.println(handshaker.uri());
             if ("live".equals(ctx.channel().attr(AttributeKey.valueOf("type")).get())) {
                 handlerWebSocketFrame(ctx, (WebSocketFrame) msg);
             }
@@ -90,11 +89,11 @@ public class HeartBeatSimpleHandle extends SimpleChannelInboundHandler<Object> {
         // 构造握手响应返回，本机测试
         WebSocketServerHandshakerFactory wsFactory = new WebSocketServerHandshakerFactory(
                 "ws://"+req.headers().get(HttpHeaderNames.HOST)+uri, null, false);
-        handshaker = wsFactory.newHandshaker(req);
-        if (handshaker == null) {
+        handShaker = wsFactory.newHandshaker(req);
+        if (handShaker == null) {
             WebSocketServerHandshakerFactory.sendUnsupportedVersionResponse(ctx.channel());
         } else {
-            handshaker.handshake(ctx.channel(), req);
+            handShaker.handshake(ctx.channel(), req);
         }
     }
 
@@ -115,9 +114,7 @@ public class HeartBeatSimpleHandle extends SimpleChannelInboundHandler<Object> {
     private void handlerWebSocketFrame(ChannelHandlerContext ctx, WebSocketFrame frame) {
         // 判断是否关闭链路的指令
         if (frame instanceof CloseWebSocketFrame) {
-            System.out.println(1);
-            handshaker.close(ctx.channel(), (CloseWebSocketFrame) frame.retain());
-            return;
+            handShaker.close(ctx.channel(), (CloseWebSocketFrame) frame.retain());
         }
     }
 }

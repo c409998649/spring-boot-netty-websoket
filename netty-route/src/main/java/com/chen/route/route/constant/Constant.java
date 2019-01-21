@@ -8,7 +8,7 @@ package com.chen.route.route.constant;
 public class Constant {
 
     // 账号信息
-    public final static String ACCTOUNT = "account:";
+    public final static String ACCOUNT = "account:";
 
     // 账号姓名
     public final static String USER = "user:";

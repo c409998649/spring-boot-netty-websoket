@@ -9,11 +9,9 @@ import com.chen.route.route.entity.ServerResVO;
 import com.chen.route.route.entity.UserInfo;
 import com.chen.route.route.service.AccountService;
 import com.chen.route.route.service.UserInfoCacheService;
-import okhttp3.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.io.IOException;
 
 /**
  * @author chenzhiying@zbj.com
