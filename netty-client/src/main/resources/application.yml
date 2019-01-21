@@ -1,0 +1,33 @@
+server:
+  port: 9400
+spring:
+  # html页面访问
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates
+    check-template-location: true
+    suffix: .html
+    encoding: UTF-8
+    mode: LEGACYHTML5
+# 连接编码
+channel:
+  id: 100
+# 连接netty通信
+netty:
+  server:
+    port: 1212
+    host: localhost
+app:
+  application:
+    # 服务名称
+    name: route
+    # 唯一编码
+    id: 1500015
+  registry:
+    # 注册中心地址
+    address: localhost:2181
+
+login:
+  url: http://localhost:9500/login
+send:
+  url: http://localhost:9500/personToMessage

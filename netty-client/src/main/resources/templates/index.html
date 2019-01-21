@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>webSokect</title>
+</head>
+<script type="text/javascript">
+    var websocket;
+
+    //如果浏览器支持WebSocket
+    if(window.WebSocket){
+        websocket = new WebSocket("ws://localhost:1212/websocket");  //获得WebSocket对象
+
+        //当有消息过来的时候触发
+        websocket.onmessage = function(event){
+            console.log(event);
+        };
+
+        //连接关闭的时候触发
+        websocket.onclose = function(event){
+            console.log("断开连接");
+        };
+
+        //连接打开的时候触发
+        websocket.onopen = function(event){
+            console.log("建立连接");
+        }
+    }else{
+        alert("浏览器不支持WebSocket");
+    }
+
+    function sendMsg(msg) { //发送消息
+        if(window.WebSocket){
+            if(websocket.readyState == WebSocket.OPEN) { //如果WebSocket是打开状态
+                websocket.send(msg); //send()发送消息
+            }
+        }else{
+            return;
+        }
+    }
+</script>
+<body>
+<button onclick="sendMsg('哈哈哈哈')">发送</button>
+</body>
+</html>
