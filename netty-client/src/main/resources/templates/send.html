@@ -13,6 +13,7 @@
             type: "POST",
             url: "/login",
             data: {
+                userId: 1,
                 account: "c409998649",
                 userName: "陈1"
             },
@@ -49,7 +50,7 @@
         }
     }
 
-    function sendMsg(msg) { //发送消息
+    function sendMsg() { //发送消息
         /*if(window.WebSocket){
             if(websocket.readyState == WebSocket.OPEN) { //如果WebSocket是打开状态
                 websocket.send(msg); //send()发送消息
@@ -63,7 +64,7 @@
             data: {
                 sendUserId: 1,
                 receiveUserId: 2,
-                msg: msg
+                msg: $("#msg").val()
             },
             contentType: "application/x-www-form-urlencoded; charset=utf-8",
             dataType: "json",
@@ -75,6 +76,7 @@
 
 </script>
 <body>
-<button onclick="sendMsg('哈哈哈哈')">发送</button>
+<input id="msg" placeholder="发送消息" />
+<button onclick="sendMsg()">发送</button>
 </body>
 </html>

@@ -15,9 +15,9 @@ import java.io.Serializable;
 public class PersonToMessage implements Serializable {
 
     // 发送人账号
-    private String sendUserId;
+    private Integer sendUserId;
     // 接收人账号
-    private String receiveUserId;
+    private Integer receiveUserId;
     // 消息
     private String msg;
 }

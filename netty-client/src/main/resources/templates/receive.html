@@ -13,6 +13,7 @@
             type: "POST",
             url: "/login",
             data: {
+                userId: 2,
                 account: "18716641778",
                 userName: "陈2"
             },
@@ -32,8 +33,8 @@
 
             //当有消息过来的时候触发
             websocket.onmessage = function(event){
-                $("#message").text(event.data);
-                console.log(event);
+                var data = JSON.parse(event.data);
+                $("#message").text(data.msg);
             };
 
             //连接关闭的时候触发

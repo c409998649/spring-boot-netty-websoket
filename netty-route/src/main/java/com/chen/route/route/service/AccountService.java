@@ -13,16 +13,16 @@ public interface AccountService {
     /**
      * 推送消息
      * @param url url
-     * @param account 发送者的账号
+     * @param userId 发送者的用户编码
      * @param groupReqVO 消息
      * @throws Exception
      */
-    void pushMsg(String url, String account, ChatReqVO groupReqVO) throws Exception;
+    void pushMsg(String url, Integer userId, ChatReqVO groupReqVO) throws Exception;
 
     /**
      * 获取某个用户的路有关系
      * @param userId 用户编码
      * @return 获取某个用户的路有关系
      */
-    ServerResVO loadRouteRelatedByUserId(String userId) ;
+    ServerResVO loadRouteRelatedByUserId(Integer userId) ;
 }

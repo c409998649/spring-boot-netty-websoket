@@ -13,7 +13,7 @@ import lombok.Data;
 public class ChatReqVO {
 
     // 接受者编码
-    private String userId;
+    private Integer userId;
     // 接受者信息
     private String msg;
 }

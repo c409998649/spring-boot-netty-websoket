@@ -27,8 +27,6 @@ public class IndexController {
     @Value("${send.url}")
     private String sendUrl;
 
-    private int userId = 0;
-
     /**
      * 发送者
      *
@@ -59,9 +57,8 @@ public class IndexController {
 
     @PostMapping("/login")
     @ResponseBody
-    public JsonMsg login(String account, String userName) {
+    public JsonMsg login(Integer userId, String account, String userName) {
         JsonMsg jsonMsg = new JsonMsg();
-        userId = userId + 1;
         UserInfo userInfo = new UserInfo();
         userInfo.setUserId(userId);
         userInfo.setAccount(account);

@@ -14,14 +14,14 @@ public interface UserInfoCacheService {
     /**
      * 根据用户账号查询用户数据
      *
-     * @param account 用户账号
+     * @param userId 用户账号
      * @return com.chen.route.route.entity.UserInfo
      * @title 根据用户账号查询用户数据
      * @author chenzhiying@zbj.com
      * @date 19-1-17
      * @since openJDK 1.8
      **/
-    UserInfo loadUserInfoByUserId(String account);
+    UserInfo loadUserInfoByUserId(Integer userId);
 
     /**
      * 保存用户信息

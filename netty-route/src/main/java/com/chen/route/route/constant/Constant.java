@@ -10,6 +10,9 @@ public class Constant {
     // 账号信息
     public final static String ACCTOUNT = "account:";
 
+    // 账号姓名
+    public final static String USER = "user:";
+
     // 路由信息
     public final static String ROUTE = "route:";
 

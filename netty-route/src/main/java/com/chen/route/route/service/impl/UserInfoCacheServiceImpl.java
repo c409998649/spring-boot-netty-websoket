@@ -21,26 +21,28 @@ public class UserInfoCacheServiceImpl implements UserInfoCacheService {
     @Resource
     private RedisService redisService;
 
-    private ConcurrentMap<String, UserInfo> USER_MAP = new ConcurrentHashMap<>();
+    private ConcurrentMap<Integer, UserInfo> USER_MAP = new ConcurrentHashMap<>();
 
     @Override
-    public UserInfo loadUserInfoByUserId(String account) {
-        UserInfo userInfo = USER_MAP.get(account);
+    public UserInfo loadUserInfoByUserId(Integer userId) {
+        UserInfo userInfo = USER_MAP.get(userId);
         if(userInfo != null){
             return userInfo;
         }
-        String userName = redisService.get(Constant.ACCTOUNT + account).toString();
+        String account = redisService.get(Constant.ACCTOUNT + userId).toString();
+        String userName = redisService.get(Constant.USER + userId).toString();
         if(userName != null){
             userInfo = new UserInfo();
+            userInfo.setUserId(userId);
             userInfo.setAccount(account);
             userInfo.setUserName(userName);
-            USER_MAP.put(account, userInfo);
+            USER_MAP.put(userId, userInfo);
         }
         return userInfo;
     }
 
     @Override
     public void saveUserInfo(UserInfo userInfo) {
-        USER_MAP.put(userInfo.getAccount(), userInfo);
+        USER_MAP.put(userInfo.getUserId(), userInfo);
     }
 }

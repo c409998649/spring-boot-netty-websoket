@@ -30,8 +30,8 @@ public class AccountServiceImpl implements AccountService {
     private UserInfoCacheService userInfoCacheService;
 
     @Override
-    public void pushMsg(String url, String account, ChatReqVO groupReqVO) throws Exception {
-        UserInfo userInfo = userInfoCacheService.loadUserInfoByUserId(account);
+    public void pushMsg(String url, Integer userId, ChatReqVO groupReqVO) throws Exception {
+        UserInfo userInfo = userInfoCacheService.loadUserInfoByUserId(userId);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("msg", userInfo.getUserName() + ":【" + groupReqVO.getMsg() + "】");
         jsonObject.put("userId", groupReqVO.getUserId());
@@ -39,7 +39,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public ServerResVO loadRouteRelatedByUserId(String userId) {
+    public ServerResVO loadRouteRelatedByUserId(Integer userId) {
         String service = redisService.get(Constant.ROUTE + userId).toString();
         ServerResVO serverResVO = new ServerResVO();
         String[] split = service.split(":");
