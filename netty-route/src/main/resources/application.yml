@@ -1,0 +1,20 @@
+# 服务端口号
+server:
+  port: 9500
+
+# Redis 配置
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    jedis:
+      pool:
+        max-idle: 100
+
+app:
+  application:
+    # 服务名称
+    name: route
+  registry:
+    # 注册中心地址
+    address: localhost:2181
