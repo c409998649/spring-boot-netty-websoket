@@ -72,7 +72,7 @@ public class HeartBeatSimpleHandle extends SimpleChannelInboundHandler<Object> {
     }
 
     private void handleHttpRequest(ChannelHandlerContext ctx, FullHttpRequest req) {
-        // 如果HTTP解码失败，返回HHTP异常
+        // 如果HTTP解码失败，返回HTTP异常
         if (!req.decoderResult().isSuccess() || (!"websocket".equals(req.headers().get("Upgrade")))) {
             sendHttpResponse(ctx, req, new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.BAD_REQUEST));
             return;
